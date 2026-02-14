@@ -1,0 +1,81 @@
+<div class="question-wrapper">
+  <div class="question-header-row">
+    <div class="col-question">Question</div>
+    <div class="col-response">Types of responses</div>
+    <div class="col-actions"></div>
+  </div>
+
+  <div cdkDropList (cdkDropListDropped)="drop($event)">
+    @for (q of questions; track q.id; let i = $index) {
+      <div
+        class="question-row"
+        cdkDrag
+        [class.active]="q.isEditing"
+        [class.selected]="q.selected"
+        (click)="toggleSelection(q, $event)"
+        (cdkDragStarted)="onDragStarted(q)"
+      >
+        <div class="col-question" (click)="editQuestion(i)">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="drag_indicator icon"
+            fontIcon="drag_indicator"
+            class="drag-indicator-icon icon"
+          ></mat-icon>
+
+          @if (q.isEditing) {
+            <input
+              #questionInput
+              class="question-input"
+              [value]="q.text"
+              placeholder="Enter your question"
+              (input)="updateQuestion(i, $event)"
+              (keydown.enter)="onEnterClick(i, $event)"
+              (blur)="saveQuestion(i)"
+            />
+          } @else {
+            <span class="question-text">
+              {{ q.text || 'Untitled question' }}
+            </span>
+          }
+        </div>
+
+        <div class="col-response">
+          <span class="response-chip">
+            @switch (q.responseType) {
+              @case ('text') {
+                <span class="type-icon text-icon">T</span>
+              }
+              @case ('checkbox') {
+                <span class="type-icon">
+                  <mat-icon
+                    aria-hidden="false"
+                    aria-label="check_box icon"
+                    fontIcon="check_box"
+                    class="type-icon checkbox-icon icon"
+                  >
+                  </mat-icon>
+                </span>
+              }
+            }
+            <select [value]="q.responseType" (change)="changeResponseType(i, $event)">
+              <option value="text">Text answer</option>
+              <option value="checkbox">Checkbox</option>
+            </select>
+          </span>
+        </div>
+
+        <div class="col-actions">
+          <mat-icon
+            fontIcon="delete"
+            class="delete-icon"
+            (click)="deleteQuestion(i)"
+            aria-label="delete icon"
+            fontIcon="delete"
+            class="delete-icon icon"
+          ></mat-icon>
+        </div>
+      </div>
+    }
+  </div>
+</div>

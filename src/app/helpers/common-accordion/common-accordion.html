@@ -1,0 +1,53 @@
+<cdk-accordion class="example-accordion">
+  <cdk-accordion-item class="example-accordion-item" [expanded]="isExpanded()">
+    <a
+      class="example-accordion-item-header accordion-btn"
+      (click)="toggleExpanded()"
+      [attr.id]="'accordion-header-' + index"
+      [attr.aria-expanded]="isExpanded()"
+      [attr.aria-controls]="'accordion-body-' + index"
+    >
+      <mat-icon
+        aria-hidden="false"
+        aria-label="keyboard_arrow_down icon"
+        fontIcon="keyboard_arrow_down"
+        class="down-arrow-icon icon"
+        [class.rotated]="!isExpanded()"
+      ></mat-icon>
+
+      @if (isEditingHeader()) {
+        <input
+          #pageHeader
+          type="text"
+          [id]="'header-input-' + index"
+          class="header-input"
+          [(ngModel)]="editedHeader"
+          (click)="onInputClick($event)"
+          (keydown)="onHeaderKeydown($event)"
+          (blur)="saveHeaderEdit()"
+        />
+      } @else {
+        <span class="header">{{ header }}</span>
+      }
+
+      <mat-icon
+        aria-hidden="false"
+        aria-label="edit icon"
+        fontIcon="edit_square"
+        class="edit-icon icon"
+        (click)="startEditingHeader($event)"
+      ></mat-icon>
+    </a>
+
+    @if (isExpanded()) {
+      <div
+        class="example-accordion-item-body"
+        role="region"
+        [attr.id]="'accordion-body-' + index"
+        [attr.aria-labelledby]="'accordion-header-' + index"
+      >
+        <ng-content></ng-content>
+      </div>
+    }
+  </cdk-accordion-item>
+</cdk-accordion>

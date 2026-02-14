@@ -1,0 +1,12 @@
+<app-common-accordion [index]="pageIndex">
+  @if (page?.questions?.length) {
+    <app-question
+      [questions]="page.questions"
+      (questionsChange)="updateQuestions($event)"
+    ></app-question>
+  }
+  <div style="padding-left: 50px">
+    <app-section [sections]="page.sections" (questionsChange)="updateSections($event)">
+    </app-section>
+  </div>
+</app-common-accordion>

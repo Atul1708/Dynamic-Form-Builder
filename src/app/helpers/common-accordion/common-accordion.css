@@ -1,0 +1,40 @@
+.accordion-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 10px 20px;
+  font-size: 1.3rem;
+  background-color: transparent;
+}
+
+.header {
+  margin-inline: 15px;
+}
+
+.down-arrow-icon {
+  width: 30px;
+  font-size: 2rem;
+  height: 30px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.down-arrow-icon.rotated {
+  transform: rotate(-90deg);
+}
+
+.header-input {
+  flex: 1;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: inherit;
+  font-family: inherit;
+  background: white;
+  outline: none;
+}
+
+.header-input:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}

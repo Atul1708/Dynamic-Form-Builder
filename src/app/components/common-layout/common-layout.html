@@ -1,0 +1,44 @@
+<!-- rgb(0, 154, 214) -->
+
+<div class="container">
+  <div class="page">
+    @for (page of pages(); track page.id; let i = $index) {
+      <app-pages
+        [page]="page"
+        [pageIndex]="i + 1"
+        (click)="activePageIndex.set(i)"
+        (updatedPage)="getUpdatedPage($event)"
+      ></app-pages>
+    }
+  </div>
+
+  <div class="btn-container">
+    <button class="btn btn-primary" (click)="addQuestion()">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="add icon"
+        fontIcon="add"
+        class="add-icon icon"
+      ></mat-icon>
+      Question
+    </button>
+    <button class="btn btn-primary" (click)="addSection()">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="list_alt icon"
+        fontIcon="list_alt"
+        class="section-icon icon"
+      ></mat-icon>
+      Section
+    </button>
+    <button class="btn btn-primary" (click)="addPage()">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="description icon"
+        fontIcon="description"
+        class="draft-icon icon"
+      ></mat-icon>
+      Page
+    </button>
+  </div>
+</div>

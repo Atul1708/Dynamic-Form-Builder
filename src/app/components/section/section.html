@@ -1,0 +1,10 @@
+@for (section of sections; track section.id; let i = $index) {
+  <app-common-accordion type="Section" [index]="i + 1">
+    @if (section?.questions?.length) {
+      <app-question [questions]="section.questions"></app-question>
+    }
+    @if (section?.sections?.length) {
+      <app-section [sections]="section.sections"></app-section>
+    }
+  </app-common-accordion>
+}

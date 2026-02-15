@@ -52,6 +52,6 @@ export class Section {
     const newSection = this.commonSerive.createEmptySection();
     section.sections = section.sections ?? [];
     section.sections.splice(qIndex + 1, 0, newSection);
-    this.sectionsChange.emit([...this.sections]);
+    this.sectionsChange.emit(this.sections);
   }
 }

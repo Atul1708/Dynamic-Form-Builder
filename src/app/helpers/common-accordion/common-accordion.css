@@ -3,9 +3,16 @@
   display: flex;
   align-items: center;
   justify-content: start;
-  padding: 10px 20px;
+  padding: 10px 0;
   font-size: 1.3rem;
   background-color: transparent;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-inline: 15px;
 }
 
 .header {
@@ -35,6 +42,23 @@
 }
 
 .header-input:focus {
-  border-color: #1976d2;
+  border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+.section-layout {
+  background-color: #1976d223;
+}
+
+.section-style {
+  background-color: #1976d251;
+  color: var(--primary-color);
+  border-radius: 50%;
+  font-size: 1.5rem;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }

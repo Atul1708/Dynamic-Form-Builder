@@ -68,7 +68,6 @@ export class Question implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Create unique drop list ID - use pageIndex and a random component ID
     const componentId = crypto.randomUUID().substring(0, 8);
     const listId =
       this.pageIndex !== undefined
@@ -170,7 +169,7 @@ export class Question implements AfterViewInit, OnInit, OnDestroy {
   }
 
   emitAddSection(questionId: string) {
-    if (this.page?.sections?.length) {
+    if (this.page?.sections?.length && this.addSectionAfterQuestion.observed) {
       this.addSectionAfterQuestion.emit(questionId);
     } else {
       this.addSectionPage.emit();

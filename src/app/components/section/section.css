@@ -11,10 +11,31 @@
   padding: 12px 0;
 }
 
+:host ::ng-deep app-section {
+  margin-left: 30px;
+  padding-left: 20px;
+  border-left: 3px solid #e0e0e0;
+  position: relative;
+}
+
+:host ::ng-deep app-section::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 3px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--primary-color), transparent);
+}
+
 :host ::ng-deep .example-accordion {
-  margin-left: 20px;
+  margin-left: 0;
 }
 
 :host ::ng-deep .accordion-btn {
   background-color: #f2f9fc;
+}
+
+:host ::ng-deep app-section .accordion-btn {
+  background-color: #f8fbfd;
 }

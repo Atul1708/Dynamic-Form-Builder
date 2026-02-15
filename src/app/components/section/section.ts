@@ -6,7 +6,7 @@ import { CommonServices } from '../../services/commonService';
 
 @Component({
   selector: 'app-section',
-  imports: [CommonAccordion, Question],
+  imports: [CommonAccordion, Question, Section],
   templateUrl: './section.html',
   styleUrl: './section.css',
 })
@@ -16,6 +16,7 @@ export class Section {
   @Input() sections!: SectionModel[];
   @Input() pageIndex!: number;
   @Input() page!: PageModel;
+  @Input() isNested: boolean = false;
   @Output() sectionsChange = new EventEmitter<SectionModel[]>();
 
   updateQuestions(id: any, updatedQuestions: QuestionModel[]) {

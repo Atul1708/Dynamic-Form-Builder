@@ -36,9 +36,11 @@ export class CommonAccordion implements OnChanges {
   expandedIndex = 0;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes && changes['index'].currentValue) {
-      this.index = changes['index'].currentValue;
-      this.header = `${this.index}-${this.type === 'Page' ? 'Page' : 'Section'}`;
+    if (changes['index']?.currentValue || changes['type']) {
+      if (changes['index']?.currentValue) {
+        this.index = changes['index'].currentValue;
+      }
+      this.header = `${this.index}-${this.type === 'Page' ? 'Page' : this.type === 'sub_section' ? 'Sub-Section' : 'Section'}`;
     }
   }
 

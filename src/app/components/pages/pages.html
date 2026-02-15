@@ -10,15 +10,13 @@
       ></app-question>
     }
     @if (page.sections.length) {
-      <div style="padding-left: 50px">
-        <app-section
-          [sections]="page.sections"
-          [pageIndex]="pageArrayIndex"
-          [page]="page"
-          (sectionsChange)="updateSections($event)"
-        >
-        </app-section>
-      </div>
+      <app-section
+        [sections]="page.sections"
+        [pageIndex]="pageArrayIndex"
+        [page]="page"
+        (sectionsChange)="updateSections($event)"
+      >
+      </app-section>
     }
   </div>
 </app-common-accordion>

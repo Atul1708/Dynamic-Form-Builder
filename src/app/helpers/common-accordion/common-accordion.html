@@ -6,47 +6,51 @@
       [attr.id]="'accordion-header-' + index"
       [attr.aria-expanded]="isExpanded()"
       [attr.aria-controls]="'accordion-body-' + index"
+      [class.section-layout]="type === 'section' || type === 'sub_section'"
     >
-      <mat-icon
-        aria-hidden="false"
-        aria-label="keyboard_arrow_down icon"
-        fontIcon="keyboard_arrow_down"
-        class="down-arrow-icon icon"
-        [class.rotated]="!isExpanded()"
-      ></mat-icon>
-
-      @if (isEditingHeader()) {
-        <input
-          #pageHeader
-          type="text"
-          [id]="'header-input-' + index"
-          class="header-input"
-          [(ngModel)]="editedHeader"
-          (click)="onInputClick($event)"
-          (keydown)="onHeaderKeydown($event)"
-          (blur)="saveHeaderEdit()"
-        />
-      } @else {
-        <span class="header">{{ header }}</span>
-      }
-
-      <mat-icon
-        aria-hidden="false"
-        aria-label="edit icon"
-        fontIcon="edit_square"
-        class="edit-icon icon"
-        (click)="startEditingHeader($event)"
-      ></mat-icon>
-
-      @if (canDelete) {
+      <div class="header-content">
         <mat-icon
           aria-hidden="false"
-          aria-label="delete icon"
-          fontIcon="delete"
-          class="delete-icon icon"
-          (click)="deleteItem($event)"
+          aria-label="keyboard_arrow_down icon"
+          fontIcon="keyboard_arrow_down"
+          class="down-arrow-icon icon"
+          [class.rotated]="!isExpanded()"
+          [class.section-style]="type === 'section' || type === 'sub_section'"
         ></mat-icon>
-      }
+
+        @if (isEditingHeader()) {
+          <input
+            #pageHeader
+            type="text"
+            [id]="'header-input-' + index"
+            class="header-input"
+            [(ngModel)]="editedHeader"
+            (click)="onInputClick($event)"
+            (keydown)="onHeaderKeydown($event)"
+            (blur)="saveHeaderEdit()"
+          />
+        } @else {
+          <span class="header">{{ header }}</span>
+        }
+
+        <mat-icon
+          aria-hidden="false"
+          aria-label="edit icon"
+          fontIcon="edit_square"
+          class="edit-icon icon"
+          (click)="startEditingHeader($event)"
+        ></mat-icon>
+
+        @if (canDelete) {
+          <mat-icon
+            aria-hidden="false"
+            aria-label="delete icon"
+            fontIcon="delete"
+            class="delete-icon icon"
+            (click)="deleteItem($event)"
+          ></mat-icon>
+        }
+      </div>
     </a>
 
     @if (isExpanded()) {

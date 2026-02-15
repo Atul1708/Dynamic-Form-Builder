@@ -1,6 +1,6 @@
 @for (section of sections; track section.id; let i = $index) {
   <app-common-accordion
-    type="Section"
+    [type]="isNested ? 'sub_section' : 'section'"
     [index]="i + 1"
     [canDelete]="true"
     (headerChangeEvent)="updateSectionHeader(section.id, $event)"
@@ -21,6 +21,8 @@
         <app-section
           [sections]="section.sections ?? []"
           [pageIndex]="pageIndex"
+          [page]="page"
+          [isNested]="true"
           (sectionsChange)="updateNestedSections(section.id, $event)"
         >
         </app-section>

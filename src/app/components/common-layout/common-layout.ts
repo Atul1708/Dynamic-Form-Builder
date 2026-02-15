@@ -1,4 +1,4 @@
-import { Component, signal, HostListener, inject } from '@angular/core';
+import { Component, signal, HostListener, inject, effect, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { CdkDropListGroup } from '@angular/cdk/drag-drop';
 import { Pages } from '../pages/pages';
@@ -11,10 +11,42 @@ import { CommonServices } from '../../services/commonService';
   templateUrl: './common-layout.html',
   styleUrl: './common-layout.css',
 })
-export class CommonLayout {
+export class CommonLayout implements OnInit {
+  private readonly STORAGE_KEY = 'form-builder-pages';
+
   commonSerive = inject(CommonServices);
   pages = signal<PageModel[]>([]);
   activePageIndex = signal(0);
+
+  constructor() {
+    effect(() => {
+      const pagesData = this.pages();
+      if (pagesData.length > 0) {
+        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(pagesData));
+      }
+    });
+  }
+
+  ngOnInit() {
+    this.loadFromLocalStorage();
+  }
+
+  private loadFromLocalStorage() {
+    const savedData = localStorage.getItem(this.STORAGE_KEY);
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        this.pages.set(parsedData);
+      } catch (error) {
+        console.error('Failed to load data from localStorage:', error);
+      }
+    }
+  }
+
+  clearLocalStorage() {
+    localStorage.removeItem(this.STORAGE_KEY);
+    this.pages.set([]);
+  }
 
   addPage(addSection: boolean = false) {
     this.pages.update((pages) => [

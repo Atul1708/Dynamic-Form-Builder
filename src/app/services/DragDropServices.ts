@@ -18,20 +18,6 @@ export class DragDropService {
     this.questionListIds.update((ids) => ids.filter((i) => i !== id));
   }
 
-  registerSectionList(id: string) {
-    if (!this.sectionListIds().includes(id)) {
-      this.sectionListIds.update((ids) => [...ids, id]);
-    }
-  }
-
-  unregisterSectionList(id: string) {
-    this.sectionListIds.update((ids) => ids.filter((i) => i !== id));
-  }
-
-  getConnectedSectionLists(currentId: string): string[] {
-    return this.sectionListIds().filter((id) => id !== currentId);
-  }
-
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

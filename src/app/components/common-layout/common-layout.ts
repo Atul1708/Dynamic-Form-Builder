@@ -43,11 +43,6 @@ export class CommonLayout implements OnInit {
     }
   }
 
-  clearLocalStorage() {
-    localStorage.removeItem(this.STORAGE_KEY);
-    this.pages.set([]);
-  }
-
   addPage(addSection: boolean = false) {
     this.pages.update((pages) => [
       ...pages,
@@ -104,7 +99,7 @@ export class CommonLayout implements OnInit {
     }
   }
 
-  getUpdatedPage(updatedQuestions: QuestionModel[], id: any) {
+  getUpdatedQuestions(updatedQuestions: QuestionModel[], id: any) {
     this.pages.update((pages) =>
       pages.map((page) => (page.id == id ? { ...page, questions: updatedQuestions } : page)),
     );

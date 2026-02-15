@@ -16,14 +16,14 @@ export class Pages {
   @Input({ required: true }) page!: PageModel;
   @Input({ required: true }) pageIndex!: number;
   @Input({ required: true }) pageArrayIndex!: number;
-  @Output() updatedPage = new EventEmitter<QuestionModel[]>();
+  @Output() updatedQuestions = new EventEmitter<QuestionModel[]>();
   @Output() updatedSections = new EventEmitter<SectionModel[]>();
   @Output() deletePage = new EventEmitter<void>();
 
   commonSerive = inject(CommonServices);
 
   updateQuestions(updated: QuestionModel[]) {
-    this.updatedPage.emit(updated);
+    this.updatedQuestions.emit(updated);
   }
 
   updateSections(updated: SectionModel[]) {

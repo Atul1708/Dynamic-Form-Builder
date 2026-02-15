@@ -6,7 +6,7 @@
         [pageIndex]="i + 1"
         [pageArrayIndex]="i"
         (click)="activePageIndex.set(i)"
-        (updatedPage)="getUpdatedPage($event, page.id)"
+        (updatedQuestions)="getUpdatedQuestions($event, page.id)"
         (updatedSections)="getUpdatedSections($event, page.id)"
         (deletePage)="deletePage(page.id)"
       ></app-pages>

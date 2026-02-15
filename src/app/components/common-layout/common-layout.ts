@@ -31,7 +31,7 @@ export class CommonLayout implements OnInit {
     this.loadFromLocalStorage();
   }
 
-  private loadFromLocalStorage() {
+  loadFromLocalStorage() {
     const savedData = localStorage.getItem(this.STORAGE_KEY);
     if (savedData) {
       try {

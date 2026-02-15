@@ -16,7 +16,7 @@ You'll need Node.js installed. That's pretty much it.
 Clone this repo and install dependencies:
 
 ```bash
-cd form-builder
+cd Dynamic-Form-Builder
 npm install
 ```
 

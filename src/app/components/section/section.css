@@ -1,0 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 12px 0;
+}
+
+:host ::ng-deep .example-accordion {
+  margin-left: 20px;
+}
+
+:host ::ng-deep .accordion-btn {
+  background-color: #f2f9fc;
+}

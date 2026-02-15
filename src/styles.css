@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+* :not(.icon) {
+  font-family: Poppins, 'Helvetica Neue', sans-serif;
+}
+
+:root {
+  --border-color: #d3d9e6;
+  --body-bg: rgb(248, 247, 250);
+  --white-color: #fff;
+  --primary-color: rgb(0, 154, 214);
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: Poppins, 'Helvetica Neue', sans-serif;
+  background-color: var(--body-bg);
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+button.btn {
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 5px;
+  background-color: var(--white-color);
+  outline: 0;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.icon {
+  font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+}

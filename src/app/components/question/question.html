@@ -1,0 +1,122 @@
+<div class="question-wrapper">
+  <div class="question-header-row">
+    <div class="col-question">Question</div>
+    <div class="col-response">Types of responses</div>
+    <div class="col-actions"></div>
+  </div>
+
+  <div
+    #cdkDropdown
+    cdkDropList
+    [id]="dropListId()"
+    [cdkDropListData]="questions"
+    (cdkDropListDropped)="drop($event)"
+    tabindex="0"
+  >
+    @for (question of questions; track question?.id; let i = $index) {
+      <div
+        class="question-row"
+        cdkDrag
+        [cdkDragData]="question"
+        [class.active]="question?.isEditing"
+        [class.selected]="question?.selected"
+        (click)="toggleSelection(question, $event)"
+        (cdkDragStarted)="onDragStarted(question)"
+      >
+        <div class="col-question" (click)="editQuestion(question?.id)">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="drag_indicator icon"
+            fontIcon="drag_indicator"
+            class="drag-indicator-icon icon"
+          ></mat-icon>
+
+          <div
+            class="input-wrapper"
+            (mouseenter)="hoveredQuestionIndex = i"
+            (mouseleave)="hoveredQuestionIndex = null"
+          >
+            @if (question?.isEditing) {
+              <div style="display: flex; align-items: center; gap: 8px">
+                <input
+                  #questionInput
+                  class="question-input"
+                  [value]="question.text"
+                  placeholder="Enter your question"
+                  (input)="updateQuestion(question?.id, $event)"
+                  (keydown.enter)="onEnterClick(question?.id, $event)"
+                  (blur)="saveQuestion(question?.id)"
+                />
+                @if (hoveredQuestionIndex === i) {
+                  <div class="input-insert-popup">
+                    <button class="btn btn-primary" (click)="addQuestion(question?.id)">
+                      <mat-icon
+                        aria-hidden="false"
+                        aria-label="add icon"
+                        fontIcon="add"
+                        class="add-icon icon"
+                      ></mat-icon>
+                      Question
+                    </button>
+                    <button class="btn btn-primary" (click)="emitAddSection(question.id)">
+                      <mat-icon
+                        aria-hidden="false"
+                        aria-label="add icon"
+                        fontIcon="add"
+                        class="add-icon icon"
+                      ></mat-icon>
+                      Section
+                    </button>
+                  </div>
+                }
+              </div>
+            } @else {
+              <span class="question-text">
+                {{ question?.text || 'Untitled question' }}
+              </span>
+            }
+          </div>
+        </div>
+
+        <div class="col-response">
+          <span class="response-chip">
+            @switch (question?.responseType) {
+              @case ('text') {
+                <span class="type-icon text-icon">T</span>
+              }
+              @case ('checkbox') {
+                <span class="type-icon">
+                  <mat-icon
+                    aria-hidden="false"
+                    aria-label="check_box icon"
+                    fontIcon="check_box"
+                    class="type-icon checkbox-icon icon"
+                  >
+                  </mat-icon>
+                </span>
+              }
+            }
+            <select
+              [value]="question?.responseType"
+              (change)="changeResponseType(question?.id, $event)"
+            >
+              <option value="text">Text answer</option>
+              <option value="checkbox">Checkbox</option>
+            </select>
+          </span>
+        </div>
+
+        <div class="col-actions">
+          <mat-icon
+            fontIcon="delete"
+            class="delete-icon"
+            (click)="deleteQuestion(question?.id)"
+            aria-label="delete icon"
+            fontIcon="delete"
+            class="delete-icon icon"
+          ></mat-icon>
+        </div>
+      </div>
+    }
+  </div>
+</div>

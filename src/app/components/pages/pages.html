@@ -1,0 +1,24 @@
+<app-common-accordion [index]="pageIndex" [canDelete]="true" (deleteEvent)="deletePage.emit()">
+  <div class="page-content">
+    @if (page.questions.length) {
+      <app-question
+        [questions]="page.questions"
+        [pageIndex]="pageArrayIndex"
+        [page]="page"
+        (questionsChange)="updateQuestions($event)"
+        (addSectionPage)="addSectionPage()"
+      ></app-question>
+    }
+    @if (page.sections.length) {
+      <div style="padding-left: 50px">
+        <app-section
+          [sections]="page.sections"
+          [pageIndex]="pageArrayIndex"
+          [page]="page"
+          (sectionsChange)="updateSections($event)"
+        >
+        </app-section>
+      </div>
+    }
+  </div>
+</app-common-accordion>

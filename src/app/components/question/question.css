@@ -114,7 +114,7 @@
   left: 50%;
   top: -20px;
   transform: translateX(-50%);
-  background: white;
+  background: var(--white-color);
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 4px 8px;
@@ -124,6 +124,17 @@
   z-index: 20;
 }
 
-.input-insert-popup .btn {
+.btn {
   padding: 5px !important;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.icon {
+  margin-right: 5px;
+  color: rgb(0, 154, 214);
+  font-weight: 500;
 }

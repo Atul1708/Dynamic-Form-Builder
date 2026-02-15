@@ -35,7 +35,7 @@ export class Question implements AfterViewInit, OnInit, OnDestroy {
   @Input() pageIndex!: number;
   @Input() page!: PageModel;
   @Output() addSectionAfterQuestion = new EventEmitter<string>();
-  @Output() addSectionPage = new EventEmitter<string>();
+  @Output() addSectionPage = new EventEmitter();
   @Output() questionsChange = new EventEmitter<QuestionModel[]>();
 
   currQIndex: number | null = null;
@@ -127,12 +127,7 @@ export class Question implements AfterViewInit, OnInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<any, any, QuestionModel>) {
-    // Delegate to service for "proper" CDK handling
     this.dragDropService.drop(event);
-
-    // Notify parents of changes
-    // Since the service mutates the arrays in place (which are the same references as 'this.questions'),
-    // we just need to emit the updated array to trigger any parent side-effects (like signal updates in CommonLayout).
     this.questionsChange.emit(this.questions);
   }
 

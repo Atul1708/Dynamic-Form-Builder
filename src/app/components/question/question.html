@@ -50,10 +50,22 @@
                 @if (hoveredQuestionIndex === i) {
                   <div class="input-insert-popup">
                     <button class="btn btn-primary" (click)="addQuestion(question?.id)">
-                      + Question
+                      <mat-icon
+                        aria-hidden="false"
+                        aria-label="add icon"
+                        fontIcon="add"
+                        class="add-icon icon"
+                      ></mat-icon>
+                      Question
                     </button>
                     <button class="btn btn-primary" (click)="emitAddSection(question.id)">
-                      + Section
+                      <mat-icon
+                        aria-hidden="false"
+                        aria-label="add icon"
+                        fontIcon="add"
+                        class="add-icon icon"
+                      ></mat-icon>
+                      Section
                     </button>
                   </div>
                 }

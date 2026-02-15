@@ -5,17 +5,25 @@
     <div class="col-actions"></div>
   </div>
 
-  <div cdkDropList (cdkDropListDropped)="drop($event)">
-    @for (q of questions; track q.id; let i = $index) {
+  <div
+    #cdkDropdown
+    cdkDropList
+    [id]="dropListId()"
+    [cdkDropListData]="questions"
+    (cdkDropListDropped)="drop($event)"
+    tabindex="0"
+  >
+    @for (question of questions; track question?.id; let i = $index) {
       <div
         class="question-row"
         cdkDrag
-        [class.active]="q.isEditing"
-        [class.selected]="q.selected"
-        (click)="toggleSelection(q, $event)"
-        (cdkDragStarted)="onDragStarted(q)"
+        [cdkDragData]="question"
+        [class.active]="question?.isEditing"
+        [class.selected]="question?.selected"
+        (click)="toggleSelection(question, $event)"
+        (cdkDragStarted)="onDragStarted(question)"
       >
-        <div class="col-question" (click)="editQuestion(i)">
+        <div class="col-question" (click)="editQuestion(question?.id)">
           <mat-icon
             aria-hidden="false"
             aria-label="drag_indicator icon"
@@ -23,26 +31,40 @@
             class="drag-indicator-icon icon"
           ></mat-icon>
 
-          @if (q.isEditing) {
-            <input
-              #questionInput
-              class="question-input"
-              [value]="q.text"
-              placeholder="Enter your question"
-              (input)="updateQuestion(i, $event)"
-              (keydown.enter)="onEnterClick(i, $event)"
-              (blur)="saveQuestion(i)"
-            />
-          } @else {
-            <span class="question-text">
-              {{ q.text || 'Untitled question' }}
-            </span>
-          }
+          <div
+            class="input-wrapper"
+            (mouseenter)="hoveredQuestionIndex = i"
+            (mouseleave)="hoveredQuestionIndex = null"
+          >
+            @if (question?.isEditing) {
+              <div style="display: flex; align-items: center; gap: 8px">
+                <input
+                  #questionInput
+                  class="question-input"
+                  [value]="question.text"
+                  placeholder="Enter your question"
+                  (input)="updateQuestion(question?.id, $event)"
+                  (keydown.enter)="onEnterClick(question?.id, $event)"
+                  (blur)="saveQuestion(question?.id)"
+                />
+                @if (hoveredQuestionIndex === i) {
+                  <div class="input-insert-popup">
+                    <button (click)="addQuestion(question?.id)">+ Question</button>
+                    <button (click)="emitAddSection(question.id)">+ Section</button>
+                  </div>
+                }
+              </div>
+            } @else {
+              <span class="question-text">
+                {{ question?.text || 'Untitled question' }}
+              </span>
+            }
+          </div>
         </div>
 
         <div class="col-response">
           <span class="response-chip">
-            @switch (q.responseType) {
+            @switch (question?.responseType) {
               @case ('text') {
                 <span class="type-icon text-icon">T</span>
               }
@@ -58,7 +80,10 @@
                 </span>
               }
             }
-            <select [value]="q.responseType" (change)="changeResponseType(i, $event)">
+            <select
+              [value]="question?.responseType"
+              (change)="changeResponseType(question?.id, $event)"
+            >
               <option value="text">Text answer</option>
               <option value="checkbox">Checkbox</option>
             </select>
@@ -69,7 +94,7 @@
           <mat-icon
             fontIcon="delete"
             class="delete-icon"
-            (click)="deleteQuestion(i)"
+            (click)="deleteQuestion(question?.id)"
             aria-label="delete icon"
             fontIcon="delete"
             class="delete-icon icon"

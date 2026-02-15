@@ -11,7 +11,12 @@ export interface QuestionModel {
 export interface SectionModel {
   id: string;
   text: string;
-  isEditing: boolean;
   questions: QuestionModel[];
   sections?: SectionModel[];
+}
+
+export interface PageModel {
+  id: string;
+  questions: QuestionModel[];
+  sections: SectionModel[];
 }

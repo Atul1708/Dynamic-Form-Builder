@@ -24,7 +24,9 @@ export class CommonAccordion implements OnChanges {
   @Input({ required: true }) index: number | null = null;
   @Input() header: string = '';
   @Input() type: string = 'Page';
+  @Input() canDelete: boolean = false;
   @Output() headerChangeEvent = new EventEmitter<string>();
+  @Output() deleteEvent = new EventEmitter<void>();
 
   isEditingHeader = signal<boolean>(false);
   isExpanded = signal<boolean>(true);
@@ -53,13 +55,17 @@ export class CommonAccordion implements OnChanges {
 
   saveHeaderEdit() {
     const newHeading = this.editedHeader.trim();
-
     if (newHeading) {
       this.header = newHeading;
       this.headerChangeEvent.emit(this.header);
     }
 
     this.isEditingHeader.set(false);
+  }
+
+  deleteItem(event: Event) {
+    event.stopPropagation();
+    this.deleteEvent.emit();
   }
 
   onHeaderKeydown(event: KeyboardEvent) {

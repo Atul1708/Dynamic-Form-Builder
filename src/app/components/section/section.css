@@ -1,4 +1,13 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
 .section-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   padding: 12px 0;
 }
 
@@ -7,14 +16,5 @@
 }
 
 :host ::ng-deep .accordion-btn {
-  background-color: #f5f5f5;
-}
-
-:host ::ng-deep .accordion-btn:hover {
-  background-color: #eeeeee;
-}
-
-:host ::ng-deep .example-accordion-item-body {
-  margin-left: 15px;
-  border-left: 2px solid #e0e0e0;
+  background-color: #f2f9fc;
 }

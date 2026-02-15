@@ -1,10 +1,30 @@
 @for (section of sections; track section.id; let i = $index) {
-  <app-common-accordion type="Section" [index]="i + 1">
-    @if (section?.questions?.length) {
-      <app-question [questions]="section.questions"></app-question>
-    }
-    @if (section?.sections?.length) {
-      <app-section [sections]="section.sections"></app-section>
-    }
+  <app-common-accordion
+    type="Section"
+    [index]="i + 1"
+    [canDelete]="true"
+    (headerChangeEvent)="updateSectionHeader(section.id, $event)"
+    (deleteEvent)="deleteSection(section.id)"
+  >
+    <div class="section-content">
+      @if (section?.questions?.length) {
+        <app-question
+          [questions]="section.questions"
+          [pageIndex]="pageIndex"
+          [page]="page"
+          (questionsChange)="updateQuestions(section.id, $event)"
+          (addSectionAfterQuestion)="addSectionAfter(section.id, $event)"
+        >
+        </app-question>
+      }
+      @if (section.sections?.length) {
+        <app-section
+          [sections]="section.sections ?? []"
+          [pageIndex]="pageIndex"
+          (sectionsChange)="updateNestedSections(section.id, $event)"
+        >
+        </app-section>
+      }
+    </div>
   </app-common-accordion>
 }

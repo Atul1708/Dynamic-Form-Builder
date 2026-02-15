@@ -37,6 +37,16 @@
         class="edit-icon icon"
         (click)="startEditingHeader($event)"
       ></mat-icon>
+
+      @if (canDelete) {
+        <mat-icon
+          aria-hidden="false"
+          aria-label="delete icon"
+          fontIcon="delete"
+          class="delete-icon icon"
+          (click)="deleteItem($event)"
+        ></mat-icon>
+      }
     </a>
 
     @if (isExpanded()) {
